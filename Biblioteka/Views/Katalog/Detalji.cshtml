@@ -1,0 +1,69 @@
+﻿@model Biblioteka.Models.Katalog.DjelaDetaljiModel
+
+<div class="container">
+    <div class="page-header clearfix  detailHeading>
+        <h2 class="text-muted">Pregled informacija o djelu</h2>
+    </div>
+</div>
+
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-md-4">
+            <div>
+                <img class="detailImage" src="@Model.UrlSlike" alt="./images/nemacover.png" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <p id="itemTitle">@Model.Naziv</p>
+            <p id="itemAuthor">@Model.AutorIliReziser</p>
+            <p id="itemStatus">@Model.Status</p>
+            <p id="itemType">@Model.Tip</p>
+            <p id="itemLocation">@Model.LokacijaDjela</p>
+
+            @if (Model.Status == "Lost")
+            {
+                <p>Ovo djelo je izgubljeno! Nije ga moguce iznajmiti!</p>
+                <p><a class="btn btn-lg btn-danger" role="button" asp-controller="Katalog" asp-action="OznaciKaoPronadjeno" asp-route-id="@Model.Id">Oznaci kao pronadjeno</a></p>
+
+            }
+
+            @if (Model.Status == "Checked out")
+            {
+                <p id="imeRezervatora">Djelo iznajmio: @Model.ImeRezervatora</p>
+                <p><a class="btn btn-lg btn-success" role="button" asp-controller="Katalog" asp-action="VratiDjelo" asp-route-id="@Model.Id">Vrati djelo</a></p>
+                <p><a class="btn btn-lg btn-warning" role="button" asp-controller="Katalog" asp-action="RezervisiDjelo" asp-route-id="@Model.Id">Rezervisi djelo</a></p>
+
+            }
+
+            @if (Model.Status == "Available")
+            {
+                <p><a class="btn btn-lg btn-info" role="button" asp-controller="Katalog" asp-action="IznajmiDjelo" asp-route-id="@Model.Id">Iznajmi</a></p>
+            }
+        </div>
+        <div class="col-md-4 detailInfo>
+            <table>
+                <tr>
+                    <td class="itemLabel">ISBN: </td>
+                    <td class="itemValue">@Model.ISBN </td>
+                </tr>
+                <tr>
+                    <td class="itemLabel">Dewy index: </td>
+                    <td class="itemValue">@Model.DeweyIndex </td>
+                </tr>
+                <tr>
+                    <td class="itemLabel">Zahtjev iznosi: </td>
+                    <td class="itemValue">@Model.Cijena </td>
+                </tr>
+
+
+            </table>
+
+
+
+        </div>
+    </div>
+
+
+</div>
+
+

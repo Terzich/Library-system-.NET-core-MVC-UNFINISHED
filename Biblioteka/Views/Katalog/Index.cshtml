@@ -1,0 +1,36 @@
+﻿@using Biblioteka.Models.Katalog
+@{
+    var Djelo = ViewData["djela"] as DjelaModel;
+}
+
+<div id="djela">
+    <h3>Katalog biblioteke</h3>
+    <div id="tabelaDjela">
+        <table class="table table-condensed" id="katalogIndexTabela">
+            <thead>
+                <tr>
+                    <th>Slika</th>
+                    <th>Naziv</th>
+                    <th>Autor / Reziser</th>
+                    <th>Dewey index</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var djelo in Djelo.Djela)
+                {
+                    <tr>
+                        <td>
+                            <a asp-controller="Katalog" asp-action="Detalji" asp-route-id="@djelo.Id">
+                                <img src="@djelo.UrlSlike" alt="/images/nemacover.png" class="imageCell" />
+                            </a>
+                        </td>
+                        <td>@djelo.Naziv</td>
+                        <td>@djelo.AutorIliReziser</td>
+                        <td>@djelo.DeweyIndex</td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
